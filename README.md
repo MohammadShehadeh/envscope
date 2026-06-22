@@ -114,18 +114,6 @@ discover workspace ─▶ collect source files ─▶ AST scan each file ─▶ 
 
 The key invariant: **a variable belongs to an app only if a file that uses it is reachable from that app's own files.** That's why `apps/web` (which imports `@sample/ui`) gets `VITE_THEME`, while `apps/api` (which doesn't) never sees it — and `DATABASE_URL` is attributed to `apps/api` alone.
 
-## Programmatic API
-
-```ts
-import { analyzeRepo, findEnvVar } from "envscope";
-
-const result = analyzeRepo(process.cwd());
-for (const app of result.analysis.apps) {
-  console.log(app.app.relDir, app.envVars.map((v) => v.name));
-}
-console.log(findEnvVar(result, "STRIPE_SECRET"));
-```
-
 ## Try the bundled examples
 
 ```bash
@@ -141,7 +129,6 @@ pnpm test             # the test suite asserts the attribution above
 ```
 src/
   cli.ts        # arg parsing + command dispatch
-  index.ts      # programmatic API
   workspace.ts  # monorepo / single-repo discovery + app classification
   scanner.ts    # ts-morph AST: env usages + import specifiers
   graph.ts      # module resolver, import graph, reachability, find-chains

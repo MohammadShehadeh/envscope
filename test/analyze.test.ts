@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import path from "node:path";
-import { analyzeRepo, findEnvVar } from "../src/index";
+import { analyzeRepo, findEnvVar } from "../src/analyze";
 
 const MONO = path.resolve(__dirname, "../example/sample-monorepo");
 const SINGLE = path.resolve(__dirname, "../example/single-app");

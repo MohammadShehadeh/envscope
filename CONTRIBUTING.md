@@ -39,7 +39,6 @@ pnpm exec tsx src/cli.ts analyze --cwd /path/to/some/repo
 ```
 src/
 ├─ cli.ts        # arg parsing + command dispatch
-├─ index.ts      # public programmatic API
 ├─ workspace.ts  # monorepo / single-repo discovery + app classification
 ├─ scanner.ts    # ts-morph AST: env usages + import specifiers
 ├─ graph.ts      # module resolver, import graph, reachability, find-chains

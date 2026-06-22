@@ -24,16 +24,6 @@
   "author": "Mohammad Shehadeh",
   "packageManager": "pnpm@10.30.3",
   "type": "commonjs",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "bin": {
     "envscope": "dist/cli.js"
   },
