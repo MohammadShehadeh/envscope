@@ -1,6 +1,6 @@
 {
   "name": "envscope",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Analyze a repo (single-package or monorepo) and determine which environment variables each app actually requires through its dependency graph.",
   "keywords": [
     "monorepo",
