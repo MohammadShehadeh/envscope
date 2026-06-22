@@ -1,0 +1,11 @@
+{
+  "name": "@sample/web",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "dependencies": {
+    "@sample/api-client": "workspace:*",
+    "@sample/payments": "workspace:*",
+    "@sample/ui": "workspace:*"
+  }
+}

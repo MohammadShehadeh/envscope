@@ -1,0 +1,52 @@
+{
+  "name": "envscope",
+  "version": "0.1.0",
+  "description": "Analyze a repo (single-package or monorepo) and determine which environment variables each app actually requires through its dependency graph.",
+  "license": "MIT",
+  "packageManager": "pnpm@10.30.3",
+  "type": "commonjs",
+  "bin": {
+    "envscope": "dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "demo": "tsx src/cli.ts analyze --cwd example/sample-monorepo",
+    "demo:find": "tsx src/cli.ts find STRIPE_SECRET --cwd example/sample-monorepo",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "keywords": [
+    "monorepo",
+    "env",
+    "environment-variables",
+    "cli",
+    "ast",
+    "turborepo",
+    "pnpm",
+    "dependency-graph"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1",
+    "ts-morph": "^24.0.0",
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}

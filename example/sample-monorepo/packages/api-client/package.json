@@ -1,0 +1,5 @@
+{
+  "name": "@sample/api-client",
+  "version": "0.0.0",
+  "main": "./src/index.ts"
+}
