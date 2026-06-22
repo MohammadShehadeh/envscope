@@ -1,0 +1,40 @@
+name: Release
+
+# Publishes to the npm registry when a GitHub Release is published.
+# Requires an NPM_TOKEN secret with publish access.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write # for npm provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Type-check, test, build
+        run: |
+          pnpm run typecheck
+          pnpm test
+          pnpm run build
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

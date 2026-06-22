@@ -2,26 +2,6 @@
   "name": "envscope",
   "version": "0.1.0",
   "description": "Analyze a repo (single-package or monorepo) and determine which environment variables each app actually requires through its dependency graph.",
-  "license": "MIT",
-  "packageManager": "pnpm@10.30.3",
-  "type": "commonjs",
-  "bin": {
-    "envscope": "dist/cli.js"
-  },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "dev": "tsx src/cli.ts",
-    "start": "node dist/cli.js",
-    "demo": "tsx src/cli.ts analyze --cwd example/sample-monorepo",
-    "demo:find": "tsx src/cli.ts find STRIPE_SECRET --cwd example/sample-monorepo",
-    "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
-  },
   "keywords": [
     "monorepo",
     "env",
@@ -32,21 +12,63 @@
     "pnpm",
     "dependency-graph"
   ],
+  "homepage": "https://github.com/MohammadShehadeh/envscope#readme",
+  "bugs": {
+    "url": "https://github.com/MohammadShehadeh/envscope/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MohammadShehadeh/envscope.git"
+  },
+  "license": "MIT",
+  "author": "Mohammad Shehadeh",
+  "packageManager": "pnpm@10.30.3",
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "envscope": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "demo": "tsx src/cli.ts analyze --cwd example/sample-monorepo",
+    "demo:find": "tsx src/cli.ts find STRIPE_SECRET --cwd example/sample-monorepo",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "pnpm run build"
+  },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "picocolors": "^1.1.1",
-    "ts-morph": "^24.0.0",
-    "yaml": "^2.6.1"
+    "ts-morph": "^28.0.0",
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "@types/node": "^26.0.0",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

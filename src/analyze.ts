@@ -154,7 +154,6 @@ function analyzeApp(
 
   return {
     app,
-    reachableFiles: [...files].sort(),
     reachablePackages: [...packages].sort(),
     envVars,
     schema,

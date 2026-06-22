@@ -1,0 +1,44 @@
+name: 🐛 Bug report
+description: Something didn't work the way you expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you run, and what did you see?
+      placeholder: |
+        I ran `envscope analyze --cwd ./my-monorepo` and ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: dropdown
+    id: layout
+    attributes:
+      label: Workspace layout
+      options:
+        - pnpm workspace
+        - npm workspaces
+        - yarn workspaces
+        - lerna
+        - single-package repo
+        - apps/* + packages/* convention
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: envscope & Node versions
+      placeholder: 'envscope 0.1.0, Node 20.11.0'
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: A link or minimal steps. The smaller, the faster we can help.

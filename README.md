@@ -25,6 +25,20 @@ In a monorepo, env vars are used deep inside shared packages, indirectly require
 ## Install / run
 
 ```bash
+# one-off, no install:
+npx envscope analyze --cwd path/to/repo
+
+# or install the CLI globally:
+npm i -g envscope
+envscope analyze --cwd path/to/repo
+
+# as a project dev dependency:
+npm i -D envscope        # pnpm add -D envscope / yarn add -D envscope
+```
+
+From a clone (development):
+
+```bash
 pnpm install
 pnpm build           # compiles to dist/, exposes the `envscope` bin
 

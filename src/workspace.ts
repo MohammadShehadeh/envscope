@@ -31,8 +31,6 @@ const LIB_DIR_PREFIXES = [
 export interface WorkspaceInfo {
   root: string;
   isMonorepo: boolean;
-  /** Short label describing how the workspace was detected. */
-  manager: string;
   packages: Pkg[];
 }
 
@@ -45,13 +43,13 @@ function readJson(file: string): PackageManifest | null {
 }
 
 /** Read declared workspace globs from the various config files. */
-function detectPatterns(root: string): { patterns: string[]; manager: string } | null {
+function detectPatterns(root: string): { patterns: string[] } | null {
   const pnpmFile = path.join(root, "pnpm-workspace.yaml");
   if (fs.existsSync(pnpmFile)) {
     try {
       const doc = YAML.parse(fs.readFileSync(pnpmFile, "utf8")) as { packages?: string[] };
       if (Array.isArray(doc?.packages) && doc.packages.length) {
-        return { patterns: doc.packages, manager: "pnpm" };
+        return { patterns: doc.packages };
       }
     } catch {
       /* fall through */
@@ -63,13 +61,13 @@ function detectPatterns(root: string): { patterns: string[]; manager: string } |
     const ws = rootPkg.workspaces as string[] | { packages?: string[] };
     const patterns = Array.isArray(ws) ? ws : ws?.packages;
     if (Array.isArray(patterns) && patterns.length) {
-      return { patterns, manager: "npm/yarn workspaces" };
+      return { patterns };
     }
   }
 
   const lerna = readJson(path.join(root, "lerna.json"));
   if (Array.isArray(lerna?.packages) && (lerna!.packages as string[]).length) {
-    return { patterns: lerna!.packages as string[], manager: "lerna" };
+    return { patterns: lerna!.packages as string[] };
   }
 
   return null;
@@ -173,14 +171,12 @@ export function discoverWorkspace(root: string): WorkspaceInfo {
   const detected = detectPatterns(absRoot);
 
   let patterns: string[] | null = detected?.patterns ?? null;
-  let manager = detected?.manager ?? "single-package";
 
   // Convention fallback: an `apps/` folder with package.json-bearing subdirs.
   if (!patterns) {
     const appsDir = path.join(absRoot, "apps");
     if (fs.existsSync(appsDir) && fs.statSync(appsDir).isDirectory()) {
       patterns = ["apps/*", "packages/*", "libs/*", "tooling/*"];
-      manager = "folder convention";
     }
   }
 
@@ -222,5 +218,5 @@ export function discoverWorkspace(root: string): WorkspaceInfo {
     }
   }
 
-  return { root: absRoot, isMonorepo, manager, packages };
+  return { root: absRoot, isMonorepo, packages };
 }

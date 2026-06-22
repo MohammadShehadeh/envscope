@@ -10,11 +10,6 @@ export function norm(p: string): string {
   return path.resolve(p).split(path.sep).join("/");
 }
 
-/** Join + normalize. */
-export function joinNorm(...parts: string[]): string {
-  return norm(path.join(...parts));
-}
-
 /** Repo-relative path with forward slashes ("." for the root itself). */
 export function relFrom(root: string, p: string): string {
   const rel = path.relative(root, p).split(path.sep).join("/");

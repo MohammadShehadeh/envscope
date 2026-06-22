@@ -6,10 +6,6 @@ import type { AppAnalysis, FindChain, RepoAnalysis } from "./types";
 
 /* ----------------------------------- analyze ----------------------------------- */
 
-function patternTag(p: string): string {
-  return pc.dim(`(${p})`);
-}
-
 function renderApp(app: AppAnalysis, lines: string[]): void {
   const title = `${app.app.relDir}` + (app.app.name !== app.app.relDir ? `  ${pc.dim(app.app.name)}` : "");
   lines.push(pc.bold(pc.cyan(`App: ${title}`)));
@@ -23,7 +19,7 @@ function renderApp(app: AppAnalysis, lines: string[]): void {
     for (const v of app.envVars) {
       lines.push(`  - ${pc.yellow(pc.bold(v.name))}`);
       for (const u of v.usages) {
-        lines.push(`      ${pc.dim(`${u.relFile}:${u.line}`)} ${patternTag(u.pattern)}`);
+        lines.push(`      ${pc.dim(`${u.relFile}:${u.line}`)} ${pc.dim(`(${u.pattern})`)}`);
       }
     }
   }

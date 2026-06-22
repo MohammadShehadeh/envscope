@@ -21,10 +21,7 @@ export interface PackageManifest {
   main?: string;
   module?: string;
   source?: string;
-  types?: string;
-  typings?: string;
   exports?: unknown;
-  private?: boolean;
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
   peerDependencies?: Record<string, string>;
@@ -74,8 +71,6 @@ export interface SchemaDiff {
 /** Full analysis for a single app. */
 export interface AppAnalysis {
   app: Pkg;
-  /** Source files reachable from this app through its dependency graph. */
-  reachableFiles: string[];
   /** Internal packages (names) reachable from this app, including itself. */
   reachablePackages: string[];
   /** Env vars required by this app, sorted by name. */
